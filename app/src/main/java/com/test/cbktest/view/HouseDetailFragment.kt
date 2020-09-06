@@ -6,13 +6,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.TransitionInflater
 import com.test.cbktest.R
 import com.test.cbktest.adapter.HouseHeaderAdapter
 import com.test.cbktest.adapter.PlantListAdapter
@@ -74,9 +78,6 @@ class HouseDetailFragment : Fragment(),
     private fun setupViewModel() {
         viewModel.getPlantList().observe(viewLifecycleOwner, Observer {
             adapter.setData(it)
-            if(it.isEmpty()) {
-
-            }
         })
         mainViewModel.getSelectHouse().observe(viewLifecycleOwner, Observer {
             toolbar_house_detail.title = it.name
@@ -88,9 +89,16 @@ class HouseDetailFragment : Fragment(),
         viewModel.fetchPlantList(location)
     }
 
-    override fun onClick(plant: Plant) {
+    override fun onClick(plant: Plant, imageView: ImageView) {
         mainViewModel.setSelectPlant(plant)
-        findNavController().navigate(R.id.action_houseDetailFragment_to_plantDetailFragment)
+
+        val extras = FragmentNavigatorExtras(
+            imageView to plant.pic01_url
+        )
+
+        val action = HouseDetailFragmentDirections.actionHouseDetailFragmentToPlantDetailFragment(
+            uri = plant.pic01_url)
+        findNavController().navigate(action, extras)
     }
 
     override fun onClick(url: String) {

@@ -9,6 +9,8 @@ import androidx.activity.addCallback
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.transition.TransitionInflater
 import com.bumptech.glide.Glide
 import com.test.cbktest.R
 import com.test.cbktest.model.Plant
@@ -19,6 +21,13 @@ class PlantDetailFragment : Fragment() {
 
     private val mainViewModel by lazy {
         ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+    }
+
+    private val args: PlantDetailFragmentArgs by navArgs()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.shared_image)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,8 +56,9 @@ class PlantDetailFragment : Fragment() {
         })
     }
     private fun updateView(plant: Plant) {
-        toolbar_plant_detail.title = plant.name_ch
+        iv_plant_cover.transitionName = args.uri
         Glide.with(iv_plant_cover).load(plant.pic01_url).into(iv_plant_cover)
+        toolbar_plant_detail.title = plant.name_ch
         tv_plant_name_cht.text = plant.name_ch
         tv_plant_name_lating.text = plant.name_latin
         tv_plant_also_known.text = plant.also_known

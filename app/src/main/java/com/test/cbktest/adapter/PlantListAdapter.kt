@@ -77,8 +77,13 @@ class PlantListAdapter(private val listener: PlantListClickListener):
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindCover(url: String) {
-            Glide.with(itemView.iv_plant_list_cover)
-                .load(url).centerCrop().into(itemView.iv_plant_list_cover)
+            itemView.iv_plant_list_cover.apply {
+                transitionName = url
+                Glide.with(this)
+                    .load(url)
+                    .centerCrop()
+                    .into(this)
+            }
         }
         fun bindName(name: String) {
             itemView.tv_plant_name.text = name
@@ -90,7 +95,7 @@ class PlantListAdapter(private val listener: PlantListClickListener):
 
         fun setClickListener(listener: PlantListClickListener, plant: Plant) {
             itemView.setOnClickListener {
-                listener.onClick(plant)
+                listener.onClick(plant, itemView.iv_plant_list_cover)
             }
         }
     }
