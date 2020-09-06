@@ -1,0 +1,35 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="toolbarStyle">@style/ToolbarStyle</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+    
+    <style name="NameStyle" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="InfoStyle" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/colorDesc</item>
+    </style>
+    <style name="MemoStyle" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/colorDesc</item>
+    </style>
+    <style name="CategoryStyle" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/colorDesc</item>
+    </style>
+    <style name="EmptyTextStyle" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/colorDesc</item>
+    </style>
+    <style name="HyperLinkStyle" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/colorHyperLink</item>
+    </style>
+</resources>
